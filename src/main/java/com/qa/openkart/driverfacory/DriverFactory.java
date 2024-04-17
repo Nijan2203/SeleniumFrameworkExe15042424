@@ -13,25 +13,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverFactory {
-	
+
 	private WebDriver driver;
 	private Properties prop;
 	private FileInputStream ip;
 	private OptionManager op;
 	private ChromeOptions co;
-	
+
 	public static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
-	
-	
+
 	public WebDriver Launchbrowser(Properties prop) {
-		
-		
+
 		op = new OptionManager(prop);
 		String browsername = prop.getProperty("browser").trim().toLowerCase();
-		System.out.println("Lanuched Browser is: "+ browsername );
+		System.out.println("Lanuched Browser is: " + browsername);
 		switch (browsername) {
 		case "chrome":
-			 co  = op.browserOption();
+			co = op.browserOption();
 			tldriver.set(new ChromeDriver(co));
 			break;
 		case "edge":
@@ -47,22 +45,21 @@ public class DriverFactory {
 			System.out.println("Please pass the valid browser..." + browsername);
 			break;
 		}
-		
+
 		getthreadlocal().manage().deleteAllCookies();
 		getthreadlocal().manage().window().maximize();
 		getthreadlocal().get(prop.getProperty("url"));
 		return getthreadlocal();
-		
+
 	}
-	
-	public  static synchronized WebDriver getthreadlocal() {
+
+	public static synchronized WebDriver getthreadlocal() {
 		return tldriver.get();
 	}
-	
-	
+
 	public Properties intiProp() {
 		prop = new Properties();
-		 try {
+		try {
 			ip = new FileInputStream("./src/test/resources/config/config.properties");
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
@@ -70,11 +67,8 @@ public class DriverFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 
+
 		return prop;
 	}
-	
-	
-	
 
 }
