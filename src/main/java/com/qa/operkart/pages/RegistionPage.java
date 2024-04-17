@@ -24,24 +24,19 @@ public class RegistionPage {
 
 	private By logoutLink = By.linkText("Logout");
 	private By registerLink = By.linkText("Register");
-	
-	
-	
+
 	public RegistionPage(WebDriver driver) {
 		this.driver = driver;
 		eleutl = new ElementUtil(driver);
 	}
-	
-	
+
 	public String getPageHeaderText() {
 		String actpagetle = eleutl.dofindWebElement(pageHeader).getText();
 		return actpagetle;
 	}
-	
-	
-	
-	
-	public boolean douserRegister(String firstname, String lastname, String email, String telephone, String password ) throws InterruptedException {
+
+	public boolean douserRegister(String firstname, String lastname, String email, String telephone, String password)
+			throws InterruptedException {
 		eleutl.waitElementVisisbility(firstName, AppConstants.DEFAULT_MEDIUM_TIMEOUT);
 		eleutl.doSendKeys(this.firstName, firstname);
 		eleutl.doSendKeys(this.lastname, lastname);
@@ -52,14 +47,14 @@ public class RegistionPage {
 		eleutl.doclick(subradio);
 		eleutl.doclick(plyagree);
 		eleutl.doclick(ctnbtn);
-		String regsuccesmsg = eleutl.waitElementVisisbility(registerSuccessMesg, AppConstants.DEFAULT_MEDIUM_TIMEOUT).getText();
-		if(regsuccesmsg.contains(AppConstants.EXPECTED_REG_SUCCESS_MESSAGE)) {
-		eleutl.doclick(logoutLink);
-		eleutl.doclick(registerLink);
-		return true;
+		String regsuccesmsg = eleutl.waitElementVisisbility(registerSuccessMesg, AppConstants.DEFAULT_MEDIUM_TIMEOUT)
+				.getText();
+		if (regsuccesmsg.contains(AppConstants.EXPECTED_REG_SUCCESS_MESSAGE)) {
+			eleutl.doclick(logoutLink);
+			eleutl.doclick(registerLink);
+			return true;
 		}
 		return false;
 	}
-	
-	
+
 }

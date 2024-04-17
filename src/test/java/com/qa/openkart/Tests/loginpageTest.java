@@ -13,22 +13,16 @@ public class loginpageTest extends BaseTest {
 
 	private WebDriver driver;
 
-	
-	
 	@DataProvider
 	public Object[][] registerData() {
-		return new Object [][] {
-			{"nijanthksr@gmail.com", "1Tiger@home"}
-		};
+		return new Object[][] { { "nijanthksr@gmail.com", "1Tiger@home" } };
 	}
-		
+
 	@Test(dataProvider = "registerData")
 	public void doCheckAccountPageTest(String usrname, String pwd) {
 		accountPage = loginPage.dologin(usrname, pwd);
 		String actAccPgeTlt = accountPage.getAccountPageTitle();
 		Assert.assertEquals(actAccPgeTlt, AppConstants.EXPECTED_ACC_PAGE_TITLE);
 	}
-	
-	
 
 }
