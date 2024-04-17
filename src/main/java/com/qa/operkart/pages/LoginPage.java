@@ -14,6 +14,7 @@ public class LoginPage {
 	private By Regiserbtn = By.linkText("Register");
 	private By username = By.id("input-email");
 	private By pwd = By.id("input-password");
+	private By loginbtn = By.xpath("//input[@type='submit']");
 	
 	
 	public LoginPage(WebDriver driver) {
@@ -31,7 +32,13 @@ public class LoginPage {
 	
 	
 	
-	public void dologin() {
+	
+	public AccountPage dologin(String usrname, String pwsd) {
+		eleutl.waitElementVisisbility(username, AppConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(usrname);
+		eleutl.doSendKeys(pwd, pwsd);
+		eleutl.doclick(loginbtn);
+		return new AccountPage(driver);
+		
 		
 	}
 	

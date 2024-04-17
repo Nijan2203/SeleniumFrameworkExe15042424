@@ -6,13 +6,23 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.openkart.base.BaseTest;
+import com.qa.openkart.constants.AppConstants;
 import com.qa.openkart.util.ExcelUtil;
 
 public class RegistrationPageTest extends BaseTest{
 	
-	@BeforeClass
-	public void getregistrationloginsetup() {
-		registrationPage =  loginPage.doclickRegisterbtn();
+//	@BeforeClass
+//	public void getregistrationloginsetup() {
+//		registrationPage =  loginPage.doclickRegisterbtn();
+//	}
+	
+	
+	
+	@Test
+	public void doclickRegisterbtnTest() {
+		registrationPage = loginPage.doclickRegisterbtn();
+		String actRegheader = registrationPage.getPageHeaderText();
+		Assert.assertEquals(actRegheader, AppConstants.EXPECTED_REG_PAGE_HEADER);
 	}
 	
 	
