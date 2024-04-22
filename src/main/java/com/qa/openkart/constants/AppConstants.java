@@ -10,4 +10,6 @@ public class AppConstants {
 	
 	public static final String EXPECTED_REG_SUCCESS_MESSAGE = "Your Account Has Been Created";
 	public static final String EXPECTED_ACC_PAGE_TITLE = "My Account";
+	
+	
 }

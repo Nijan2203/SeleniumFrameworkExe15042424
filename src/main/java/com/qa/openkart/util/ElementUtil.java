@@ -13,8 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ElementUtil {
 
 	private WebDriver driver;
-	
-	
+
 	public ElementUtil(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -23,6 +22,12 @@ public class ElementUtil {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	public List<WebElement> waitElementsVisisbility(By locator, int timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+	}
+	
 
 	public WebElement dofindWebElement(By Locator) {
 		return driver.findElement(Locator);
@@ -35,16 +40,17 @@ public class ElementUtil {
 	public void doclick(By locator) {
 		dofindWebElement(locator).click();
 	}
-	
+
 	public void doSendKeys(By locator, String value) {
+		dofindWebElement(locator).clear();
 		dofindWebElement(locator).sendKeys(value);
+		
 	}
-	
+
 	public void doActionclick(By locator) {
 		Actions act = new Actions(driver);
 		act.click(dofindWebElement(locator)).build().perform();
-		;;
+
 	}
-	
 
 }
