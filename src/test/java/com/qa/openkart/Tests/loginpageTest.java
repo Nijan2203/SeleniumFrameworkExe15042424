@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.qa.openkart.base.BaseTest;
 import com.qa.openkart.constants.AppConstants;
-import com.qa.operkart.pages.AccountPage;
 
 public class loginpageTest extends BaseTest {
 

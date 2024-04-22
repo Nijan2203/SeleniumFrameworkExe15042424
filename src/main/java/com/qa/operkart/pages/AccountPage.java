@@ -29,10 +29,10 @@ public class AccountPage {
 	}
 	
 	
-	public productInfoScreen getSearchkeyword(String keysearch) {
+	public productSearchScreen getSearchkeyword(String keysearch) {
 		eleutl.doSendKeys(Searchkey,keysearch);
 		eleutl.doclick(Searchbtn);
-		return new productInfoScreen(driver);
+		return new productSearchScreen(driver);
 	}
 
 }
