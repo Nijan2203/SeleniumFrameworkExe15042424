@@ -10,6 +10,7 @@ import com.qa.openkart.driverfacory.DriverFactory;
 import com.qa.operkart.pages.AccountPage;
 import com.qa.operkart.pages.LoginPage;
 import com.qa.operkart.pages.RegistionPage;
+import com.qa.operkart.pages.productInfoPage;
 import com.qa.operkart.pages.productSearchScreen;
 
 public class BaseTest {
@@ -21,6 +22,7 @@ public class BaseTest {
 	protected RegistionPage registrationPage;
 	protected AccountPage accountPage;
 	protected productSearchScreen prdSearchpage;
+	protected productInfoPage prdInfoPage;
 
 	@BeforeTest
 	public void setup() {
