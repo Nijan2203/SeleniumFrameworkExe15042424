@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.qa.openkart.base.BaseTest;
 import com.qa.openkart.constants.AppConstants;
 import com.qa.operkart.pages.AccountPage;
+import com.qa.operkart.pages.productInfoPage;
 import com.qa.operkart.pages.productSearchScreen;
 
 public class AccountPageTest extends BaseTest {
@@ -19,29 +20,40 @@ public class AccountPageTest extends BaseTest {
 	public void doLoginPageSetup() {
 		accountPage = loginPage.dologin(prop.getProperty("username").trim(), prop.getProperty("password").trim());
 	}
-	
-	
+
 	@Test
 	public void doAccPgeTitleTest() {
 		Assert.assertEquals(accountPage.getAccountPageTitle(), AppConstants.EXPECTED_ACC_PAGE_TITLE);
 	}
-	
-	
+
 	@DataProvider
 	public Object[][] getSearchKeyWord() {
-		return new Object[][] {
-			{"Macbook"},
-			{"Samsung"},
-			{"Apple"}
-		};
+		return new Object[][] { { "Macbook" }, { "Samsung" }, { "Apple" } };
 	}
-	
+
 	@Test(dataProvider = "getSearchKeyWord")
 	public void doProductSearchTest(String keySearch) {
-		
+
 		prdSearchpage = accountPage.getSearchkeyword(keySearch);
-		Assert.assertTrue(prdSearchpage.getSearchProductCount()>0);
+		Assert.assertTrue(prdSearchpage.getSearchProductCount() > 0);
 	}
-	
-	
+
+	@DataProvider
+	public Object[][] getprodcutSltData() {
+		return new Object[][] { { "Macbook", "MacBook" } };
+	}
+
+	@Test(dataProvider = "getprodcutSltData")
+	public void doSearchPrdselectTest(String keySearch, String selectPrd) {
+
+		prdSearchpage = accountPage.getSearchkeyword(keySearch);
+		if (prdSearchpage.getSearchProductCount() > 0) {
+
+			prdInfoPage = prdSearchpage.selectProduct(selectPrd);
+			String prdHeaderTxt = prdInfoPage.getprodcutHeadervalue();
+			Assert.assertEquals(prdHeaderTxt, selectPrd);
+		}
+
+	}
+
 }
