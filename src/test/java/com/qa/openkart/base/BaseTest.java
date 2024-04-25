@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.asserts.SoftAssert;
 
 import com.qa.openkart.driverfacory.DriverFactory;
 import com.qa.operkart.pages.AccountPage;
@@ -23,7 +24,8 @@ public class BaseTest {
 	protected AccountPage accountPage;
 	protected productSearchScreen prdSearchpage;
 	protected productInfoPage prdInfoPage;
-
+	protected SoftAssert softAssert;
+	
 	@BeforeTest
 	public void setup() {
 		df = new DriverFactory();
@@ -31,6 +33,7 @@ public class BaseTest {
 		driver = df.Launchbrowser(prop);
 
 		loginPage = new LoginPage(driver);
+		softAssert = new SoftAssert();
 
 	}
 

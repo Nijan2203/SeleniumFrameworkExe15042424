@@ -23,7 +23,7 @@ public class ExcelUtil {
 			book = WorkbookFactory.create(excelfilepath);
 			sheet = book.getSheet(sheetname);
 
-			data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
+			data  = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
 
 			for (int i = 0; i < sheet.getLastRowNum(); i++) {
 				for (int j = 0; j < sheet.getRow(0).getLastCellNum(); j++) {
