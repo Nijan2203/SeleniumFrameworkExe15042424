@@ -71,4 +71,13 @@ public class DriverFactory {
 		return prop;
 	}
 
+	public static String getScreenshot() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+	
+	
+	
+
 }
