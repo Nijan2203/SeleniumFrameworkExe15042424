@@ -35,7 +35,9 @@ public class ExcelUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-		} catch (FileNotFoundException e) {
+		}
+
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (EncryptedDocumentException e) {

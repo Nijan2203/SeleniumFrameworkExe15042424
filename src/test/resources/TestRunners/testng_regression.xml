@@ -2,11 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Opencart App Test framework Suite" thread-count="4"
 	parallel="tests" verbose="4">
-	<test name="Register Page Test">
-		<classes>
-			<class name="com.qa.openkart.Tests.RegistrationPageTest" />
-		</classes>
-	</test>
+	<listeners>
+		<listener
+			class-name="com.qa.openkart.listeners.ExtentReportListener" />
+	</listeners>
+<!--	<test name="Register Page Test">-->
+<!--		<classes>-->
+<!--			<class name="com.qa.openkart.Tests.RegistrationPageTest" />-->
+<!--		</classes>-->
+<!--	</test>-->
 	<test name="Login Page Test">
 		<classes>
 			<class name="com.qa.openkart.Tests.loginpageTest" />
