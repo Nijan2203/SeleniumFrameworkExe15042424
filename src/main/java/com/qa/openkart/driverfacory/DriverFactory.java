@@ -1,15 +1,19 @@
 package com.qa.openkart.driverfacory;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverFactory {
@@ -72,7 +76,16 @@ public class DriverFactory {
 	}
 
 	public static String getScreenshot() {
-		// TODO Auto-generated method stub
+		File srcFile = ((TakesScreenshot)getthreadlocal()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir")+"/screenshot/"+System.currentTimeMillis()+".png";
+		File desFile = new File(path);
+		try {
+			FileHandler.copy(srcFile,desFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path;
 		
 		
 	}
