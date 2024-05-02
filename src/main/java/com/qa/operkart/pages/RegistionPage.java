@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.qa.openkart.constants.AppConstants;
 import com.qa.openkart.util.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class RegistionPage {
 
 	private WebDriver driver;
@@ -30,11 +32,13 @@ public class RegistionPage {
 		eleutl = new ElementUtil(driver);
 	}
 
+	@Step("Check the Header of Login Page")
 	public String getPageHeaderText() {
 		String actpagetle = eleutl.dofindWebElement(pageHeader).getText();
 		return actpagetle;
 	}
 
+	@Step("Register the user account")
 	public boolean douserRegister(String firstname, String lastname, String email, String telephone, String password)
 			throws InterruptedException {
 		eleutl.waitElementVisisbility(firstName, AppConstants.DEFAULT_MEDIUM_TIMEOUT);

@@ -16,8 +16,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 
-
-
 public class DriverFactory {
 
 	private WebDriver driver;
@@ -78,26 +76,21 @@ public class DriverFactory {
 	}
 
 	public static String getScreenshot() {
-		
-		File srcFile = ((TakesScreenshot)getthreadlocal()).getScreenshotAs(OutputType.FILE);
-		String path  = System.getProperty("user.dir")+"/screenshot/"+System.currentTimeMillis()+".png";
-		File distination = new File(path); 
+
+		File srcFile = ((TakesScreenshot) getthreadlocal()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
+		File distination = new File(path);
 
 		try {
-			FileHandler.copy(srcFile,distination);
+			FileHandler.copy(srcFile, distination);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
 		return path;
-		
-		
-	}
-	
-	
 
+	}
 
 }

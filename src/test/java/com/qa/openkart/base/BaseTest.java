@@ -25,7 +25,7 @@ public class BaseTest {
 	protected productSearchScreen prdSearchpage;
 	protected productInfoPage prdInfoPage;
 	protected SoftAssert softAssert;
-	
+
 	@BeforeTest
 	public void setup() {
 		df = new DriverFactory();

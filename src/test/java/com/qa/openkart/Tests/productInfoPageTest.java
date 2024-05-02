@@ -10,6 +10,14 @@ import org.testng.annotations.Test;
 import com.qa.openkart.base.BaseTest;
 import com.qa.openkart.constants.AppConstants;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
+@Epic("300 - Product page Test with TTD")
+@Story("Product Page_301 - Test the page details with Assertion")
 public class productInfoPageTest extends BaseTest {
 
 	@BeforeClass
@@ -17,12 +25,12 @@ public class productInfoPageTest extends BaseTest {
 		accountPage = loginPage.dologin(prop.getProperty("username"), prop.getProperty("password"));
 
 	}
-	
-	
 
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Checking the search Product")
 	@DataProvider
 	public Object[][] getprodcutSltData() {
-		return new Object[][] { { "Macbook", "MacBook"} };
+		return new Object[][] { { "Macbook", "MacBook" } };
 	}
 
 	@Test(dataProvider = "getprodcutSltData")
@@ -38,20 +46,20 @@ public class productInfoPageTest extends BaseTest {
 		softAssert.assertAll();
 	}
 
-	
 	@DataProvider
 	public Object[][] getaddcartData() {
 		return new Object[][] { { "Macbook", "MacBook", 5 } };
 	}
-	
-	
+
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Checking the add cart Product")
 	@Test(dataProvider = "getaddcartData")
 	public void doaddcartTest(String keySearch, String selectPrd, int Qty) {
 		prdSearchpage = accountPage.getSearchkeyword(keySearch);
 		prdInfoPage = prdSearchpage.selectProduct(selectPrd);
-		String succtext =  prdInfoPage.doaddcart(Qty);
-		Assert.assertEquals(succtext,AppConstants.EXPECTED_ADD_CART_SUCCESS_MESSAGE);
-		
+		String succtext = prdInfoPage.doaddcart(Qty);
+		Assert.assertEquals(succtext, AppConstants.EXPECTED_ADD_CART_SUCCESS_MESSAGE);
+
 	}
-	
+
 }
