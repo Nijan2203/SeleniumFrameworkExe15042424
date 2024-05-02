@@ -23,7 +23,6 @@ public class ExcelUtil {
 			excelfilepath = new FileInputStream("./src/test/resources/OpenCartTestData/OpenKartTestData.xls");
 			book = WorkbookFactory.create(excelfilepath);
 			sheet = book.getSheet(sheetname);
-
 			data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
 
 			for (int i = 0; i < sheet.getLastRowNum(); i++) {
@@ -35,6 +34,7 @@ public class ExcelUtil {
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
 
 		catch (FileNotFoundException e) {

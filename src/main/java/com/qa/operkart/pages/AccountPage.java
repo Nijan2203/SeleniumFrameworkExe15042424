@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import com.qa.openkart.constants.AppConstants;
 import com.qa.openkart.util.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class AccountPage {
 
 	private WebDriver driver;
@@ -14,8 +16,6 @@ public class AccountPage {
 	private By accPgeTlt = By.xpath("//div[@id='content']/h2");
 	private By Searchkey = By.xpath("//input[@placeholder='Search']");
 	private By Searchbtn = By.xpath("//button[@class='btn btn-default btn-lg']");
-	
-	
 
 	public AccountPage(WebDriver driver) {
 		this.driver = driver;
@@ -23,14 +23,15 @@ public class AccountPage {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Step("Check the Header text of Account Page")
 	public String getAccountPageTitle() {
 		return eleutl.waitElementVisisbility(accPgeTlt, AppConstants.DEFAULT_MEDIUM_TIMEOUT).getText();
 
 	}
-	
-	
+
+	@Step("Search the Keyword in Account Page")
 	public productSearchScreen getSearchkeyword(String keysearch) {
-		eleutl.doSendKeys(Searchkey,keysearch);
+		eleutl.doSendKeys(Searchkey, keysearch);
 		eleutl.doclick(Searchbtn);
 		return new productSearchScreen(driver);
 	}

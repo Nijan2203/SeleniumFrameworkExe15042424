@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.qa.openkart.constants.AppConstants;
 import com.qa.openkart.util.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class LoginPage {
 
 	private WebDriver driver;
@@ -21,12 +23,14 @@ public class LoginPage {
 		eleutl = new ElementUtil(driver);
 	}
 
+	@Step("Register the login account")
 	public RegistionPage doclickRegisterbtn() {
 		eleutl.waitElementVisisbility(Regiserbtn, AppConstants.DEFAULT_MEDIUM_TIMEOUT);
 		eleutl.doclick(Regiserbtn);
 		return new RegistionPage(driver);
 	}
 
+	@Step("Login the Aplication with username:{0} and password:{1}")
 	public AccountPage dologin(String usrname, String pwsd) {
 		eleutl.waitElementVisisbility(username, AppConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(usrname);
 		eleutl.doSendKeys(pwd, pwsd);

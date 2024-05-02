@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import com.qa.openkart.constants.AppConstants;
 import com.qa.openkart.util.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class productInfoPage {
 
 	private WebDriver driver;
@@ -31,12 +33,14 @@ public class productInfoPage {
 		eleutl = new ElementUtil(driver);
 	}
 
+	@Step("Check the project Title")
 	public String getprodcutHeadervalue() {
 		String prdHeaderValue = eleutl.waitElementVisisbility(productHeader, AppConstants.DEFAULT_MEDIUM_TIMEOUT)
 				.getText();
 		return prdHeaderValue;
 	}
 
+	@Step("Get the product info Details")
 	public Map<String, String> getProductDetails() {
 
 		prdInfoMap = new LinkedHashMap<String, String>();
@@ -69,16 +73,17 @@ public class productInfoPage {
 		prdInfoMap.put("Extra Tax", expriceVal);
 	}
 
+	@Step("Add the product into Cart")
 	public String doaddcart(int qty) {
 		eleutl.waitElementVisisbility(cartQty, AppConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(String.valueOf(qty));
 		eleutl.doclick(addcartbtn);
 		String succMsg = eleutl.waitElementVisisbility(successMsg, AppConstants.DEFAULT_MEDIUM_TIMEOUT).getText();
 		StringBuilder msgtext = new StringBuilder(succMsg);
-		String suctxt = msgtext.substring(0,msgtext.length()-2);
+		String suctxt = msgtext.substring(0, msgtext.length() - 2);
 		System.out.println(succMsg);
 		System.out.println(suctxt);
 		return suctxt;
-		
+
 	}
 
 }

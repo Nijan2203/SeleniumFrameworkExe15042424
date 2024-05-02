@@ -76,21 +76,21 @@ public class DriverFactory {
 	}
 
 	public static String getScreenshot() {
-		File srcFile = ((TakesScreenshot)getthreadlocal()).getScreenshotAs(OutputType.FILE);
-		String path = System.getProperty("user.dir")+"/screenshot/"+System.currentTimeMillis()+".png";
-		File desFile = new File(path);
+
+		File srcFile = ((TakesScreenshot) getthreadlocal()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
+		File distination = new File(path);
+
 		try {
-			FileHandler.copy(srcFile,desFile);
+			FileHandler.copy(srcFile, distination);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return path;
-		
-		
+
 	}
-	
-	
-	
 
 }
