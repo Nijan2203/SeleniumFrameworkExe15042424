@@ -13,8 +13,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
+
+import qa.com.openkart.Exception.FrameWorkException;
 
 public class DriverFactory {
 
@@ -23,6 +26,7 @@ public class DriverFactory {
 	private FileInputStream ip;
 	private OptionManager op;
 	private ChromeOptions co;
+	private FirefoxOptions fo;
 
 	public static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
 
@@ -43,7 +47,8 @@ public class DriverFactory {
 			driver = new SafariDriver();
 			break;
 		case "firefox":
-			driver = new FirefoxDriver();
+			fo = op.firefoxopt();
+			tldriver.set(new FirefoxDriver(fo));
 			break;
 		default:
 			System.out.println("Please pass the valid browser..." + browsername);
@@ -62,16 +67,36 @@ public class DriverFactory {
 	}
 
 	public Properties intiProp() {
+		FileInputStream ip = null;
 		prop = new Properties();
+		String envName = System.getProperty("env");
+		System.out.println("Execution Evnrionment is: " + envName);
 		try {
-			ip = new FileInputStream("./src/test/resources/config/config.properties");
-			prop.load(ip);
+			if (envName == null) {
+				ip = new FileInputStream("src/test/resources/config/config.properties");
+			} else {
+				switch (envName.toLowerCase().trim()) {
+				case "qa":
+					ip = new FileInputStream("src/test/resources/config/qa.config.properties");
+					break;
+				case "prod":
+					ip = new FileInputStream("src/test/resources/config/config.properties");
+					break;
+				default:
+					System.out.println("Please Enter the valid Environment!....");
+					throw new FrameWorkException("WRONG ENVIRONMENT HAS BEEN USED");
+//				break;
+				}
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+		try {
+			prop.load(ip);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return prop;
 	}
 

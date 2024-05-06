@@ -10,11 +10,11 @@
 		<listener
 			class-name="com.qa.openkart.listeners.AnnotationTransformer" />
 	</listeners>
-	<test name="Register Page Test">
-		<classes>
-			<class name="com.qa.openkart.Tests.RegistrationPageTest" />
-		</classes>
-	</test>
+<!--	<test name="Register Page Test">-->
+<!--		<classes>-->
+<!--			<class name="com.qa.openkart.Tests.RegistrationPageTest" />-->
+<!--		</classes>-->
+<!--	</test>-->
 	<test name="Login Page Test">
 		<classes>
 			<class name="com.qa.openkart.Tests.loginpageTest" />

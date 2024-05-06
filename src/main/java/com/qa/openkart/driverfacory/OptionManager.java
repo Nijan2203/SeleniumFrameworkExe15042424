@@ -4,11 +4,14 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class OptionManager {
 
 	private Properties prop;
 	private ChromeOptions co;
+	private FirefoxOptions fo;
 
 	public OptionManager(Properties prop) {
 		this.prop = prop;
@@ -25,6 +28,20 @@ public class OptionManager {
 		System.out.println("================================Headless Mode is ON==============================");
 
 		return co;
+
+	}
+
+	public FirefoxOptions firefoxopt() {
+
+		fo = new FirefoxOptions();
+
+		if (Boolean.parseBoolean(prop.getProperty("headless").trim()))
+			fo.addArguments("--headless");
+		if (Boolean.parseBoolean(prop.getProperty("incognito").trim()))
+			fo.addArguments("--incognito");
+		System.out.println("================================Headless Mode is ON==============================");
+
+		return fo;
 
 	}
 
