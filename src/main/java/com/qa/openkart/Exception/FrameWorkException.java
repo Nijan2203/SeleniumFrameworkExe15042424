@@ -1,4 +1,4 @@
-package qa.com.openkart.Exception;
+package com.qa.openkart.Exception;
 
 public class FrameWorkException extends RuntimeException {
 

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.aspectj.util.FileUtil;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 
-import qa.com.openkart.Exception.FrameWorkException;
+import com.qa.openkart.Exception.FrameWorkException;
 
 public class DriverFactory {
 
@@ -107,7 +108,7 @@ public class DriverFactory {
 		File distination = new File(path);
 
 		try {
-			FileHandler.copy(srcFile, distination);
+			FileUtil.copyFile(srcFile, distination);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
