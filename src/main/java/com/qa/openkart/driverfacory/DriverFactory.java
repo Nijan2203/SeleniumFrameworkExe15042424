@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
@@ -28,6 +29,7 @@ public class DriverFactory {
 	private OptionManager op;
 	private ChromeOptions co;
 	private FirefoxOptions fo;
+	private EdgeOptions eo;
 
 	public static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
 
@@ -42,7 +44,8 @@ public class DriverFactory {
 			tldriver.set(new ChromeDriver(co));
 			break;
 		case "edge":
-			driver = new EdgeDriver();
+			eo = op.edgeopt();
+			tldriver.set(new EdgeDriver(eo));
 			break;
 		case "safari":
 			driver = new SafariDriver();

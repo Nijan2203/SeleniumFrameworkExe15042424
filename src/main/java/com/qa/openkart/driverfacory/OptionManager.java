@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -12,7 +13,8 @@ public class OptionManager {
 	private Properties prop;
 	private ChromeOptions co;
 	private FirefoxOptions fo;
-
+	private EdgeOptions eo;
+	
 	public OptionManager(Properties prop) {
 		this.prop = prop;
 	}
@@ -45,4 +47,18 @@ public class OptionManager {
 
 	}
 
+	
+	public EdgeOptions edgeopt() {
+
+		eo = new EdgeOptions();
+
+		if (Boolean.parseBoolean(prop.getProperty("headless").trim()))
+			eo.addArguments("--headless");
+		if (Boolean.parseBoolean(prop.getProperty("incognito").trim()))
+			eo.addArguments("--incognito");
+		System.out.println("================================Headless Mode is ON==============================");
+
+		return eo;
+
+	}
 }
