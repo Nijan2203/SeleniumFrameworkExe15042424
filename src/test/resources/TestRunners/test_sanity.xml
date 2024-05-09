@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Opencart App Test framework Suite" thread-count="4"
+	parallel="tests" verbose="4">
+	<listeners>
+		<listener
+			class-name="com.qa.openkart.listeners.ExtentReportListener" />
+		<listener
+			class-name="com.qa.openkart.listeners.TestAllureListener" />
+		<listener
+			class-name="com.qa.openkart.listeners.AnnotationTransformer" />
+	</listeners>
+<!--	<test name="Register Page Test">-->
+<!--		<classes>-->
+<!--			<class name="com.qa.openkart.Tests.RegistrationPageTest" />-->
+<!--		</classes>-->
+<!--	</test>-->
+	<test name="Login Page Test">
+		<classes>
+			<class name="com.qa.openkart.Tests.loginpageTest" />
+		</classes>
+	</test>
+</suite>
