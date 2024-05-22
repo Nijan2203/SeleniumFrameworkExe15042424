@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.aspectj.util.FileUtil;
@@ -16,7 +18,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import com.qa.openkart.Exception.FrameWorkException;
@@ -38,34 +40,75 @@ public class DriverFactory {
 		op = new OptionManager(prop);
 		String browsername = prop.getProperty("browser").trim().toLowerCase();
 		System.out.println("Lanuched Browser is: " + browsername);
-		switch (browsername) {
+		switch (browsername.toLowerCase().trim()) {
 		case "chrome":
-			co = op.browserOption();
-			tldriver.set(new ChromeDriver(co));
+
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("chrome");
+				System.out.println("Driver created ");
+			} else {
+				tldriver.set(new ChromeDriver(co));
+			}
 			break;
 		case "edge":
 			eo = op.edgeopt();
-			tldriver.set(new EdgeDriver(eo));
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("edge");
+			} else {
+				tldriver.set(new EdgeDriver(eo));
+				System.out.println("Driver created ");
+			}
 			break;
+
 		case "safari":
 			driver = new SafariDriver();
 			break;
 		case "firefox":
 			fo = op.firefoxopt();
-			tldriver.set(new FirefoxDriver(fo));
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("firefox");
+			} else {
+				tldriver.set(new FirefoxDriver(fo));
+				System.out.println("Driver created ");
+			}
 			break;
 		default:
 			System.out.println("Please pass the valid browser..." + browsername);
 			break;
 		}
-
+		
 		getthreadlocal().manage().deleteAllCookies();
 		getthreadlocal().manage().window().maximize();
 		getthreadlocal().get(prop.getProperty("url"));
 		return getthreadlocal();
+	}
+
+	private void init_remoteDriver(String browser) {
+		try {
+		switch (browser.toLowerCase().trim()) {
+		case "chrome":
+			tldriver.set(new RemoteWebDriver(new URL(prop.getProperty("cloudhub")), op.browserOption()));
+			break;
+		case "edge":
+			tldriver.set(new RemoteWebDriver(new URL(prop.getProperty("cloudhub")), op.edgeopt()));
+			break;
+		case "firefox":
+			tldriver.set(new RemoteWebDriver(new URL(prop.getProperty("cloudhub")), op.firefoxopt()));
+			break;
+			
+		default:
+			System.out.println("Please pass the valid browser..."+ browser);
+			throw new  FrameWorkException("NOREMOTEWEBDRIVEREXCEPTION");
+		}
+		}catch (MalformedURLException e ) {
+			// TODO: handle exception
+		}
 
 	}
 
+	
+
+	
 	public static synchronized WebDriver getthreadlocal() {
 		return tldriver.get();
 	}
